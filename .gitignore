@@ -1,11 +1,37 @@
+# Dependencies
 node_modules
-.next
-.DS_Store
-yarn-error.log
 .yalc
 yalc.lock
 
+# Next.js build output
+.next
+public/.nextra
+
+# Vercel
+.vercel
+
+# Environment variables
+.env
+
+# OS generated files
+.DS_Store
+
+# Logs
+yarn-error.log
+*.log
+
+# IDE specific files
+.idea/
+
+# TypeScript
+next-env.d.ts
+
+# Docker volumes
+typesense-data/
+
+# Build artifacts
 public/*.st
 public/*.toml
-public/.nextra
-.vercel
+
+# Docker compose file (uncomment if you don't want to track it)
+# docker-compose.yml
