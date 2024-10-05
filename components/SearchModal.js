@@ -54,7 +54,6 @@ const handleSearch = async (searchQuery) => {
   setQuery(searchQuery);
   if (searchQuery.length > 2) {
     try {
-      console.log('Searching with query:', searchQuery);
       console.log('Typesense config:', {
         host: process.env.NEXT_PUBLIC_TYPESENSE_HOST,
         port: process.env.NEXT_PUBLIC_TYPESENSE_PORT,
@@ -65,11 +64,12 @@ const handleSearch = async (searchQuery) => {
         query_by: 'title,content',
         per_page: 5,
       };
+      console.log('Searching with parameters:', searchParameters);
       const results = await typesenseClient.collections('docs').documents().search(searchParameters);
       console.log('Search results:', results);
       setSearchResults(results.hits || []);
     } catch (error) {
-      console.error('Search error:', error);
+      console.error('Search error details:', error);
       setSearchResults([]);
     }
   } else {

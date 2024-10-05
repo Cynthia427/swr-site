@@ -24,8 +24,13 @@ const openai = new OpenAI({
 });
 
 const typesenseClient = new Typesense.Client({
-  nodes: [{ host: process.env.TYPESENSE_HOST || 'localhost', port: 8108, protocol: 'http' }],
+  nodes: [{
+    host: process.env.TYPESENSE_HOST || 'localhost',
+    port: parseInt(process.env.TYPESENSE_PORT || '8108'),
+    protocol: process.env.TYPESENSE_PROTOCOL || 'http'
+  }],
   apiKey: process.env.TYPESENSE_API_KEY || 'xyz',
+  connectionTimeoutSeconds: 2
 });
 
 const systemPrompt = `
@@ -81,12 +86,24 @@ export default async function handler(
       return res.status(400).json({ error: 'Query is required' });
     }
 
-    console.log('Searching Typesense for:', query);
-    const searchResults: SearchResponse = await typesenseClient.collections('docs').documents().search({
-      q: query,
-      query_by: 'title,content',
-      per_page: 3,
+    console.log('Typesense configuration:', {
+      host: process.env.TYPESENSE_HOST,
+      port: process.env.TYPESENSE_PORT,
+      protocol: process.env.TYPESENSE_PROTOCOL
     });
+
+    console.log('Searching Typesense for:', query);
+    let searchResults: SearchResponse;
+    try {
+      searchResults = await typesenseClient.collections('docs').documents().search({
+        q: query,
+        query_by: 'title,content',
+        per_page: 3,
+      });
+    } catch (typesenseError) {
+      console.error('Typesense search error:', typesenseError);
+      return res.status(500).json({ error: 'An error occurred while searching the documentation.' });
+    }
 
     console.log('Typesense search results:', JSON.stringify(searchResults, null, 2));
 
