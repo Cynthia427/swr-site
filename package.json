@@ -3,13 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-  "dev": "next dev",
+"scripts": {
+  "dev": "node server.js",
   "build": "next build",
-  "start": "next start",
-  "index-docs": "node indexDocs.js",
-  "dev:with-typesense": "docker-compose -f docker-compose.local.yml up -d && next dev"
-  },
+  "start": "NODE_ENV=production node server.js",
+  "lint": "next lint"
+},
   "author": "Shu Ding",
   "license": "Apache-2.0",
   "dependencies": {
