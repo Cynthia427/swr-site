@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "next",
-    "debug": "NODE_OPTIONS='--inspect' next",
-    "start": "next start",
-    "build": "next build"
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start",
+  "index-docs": "node indexDocs.js",
+  "dev:with-typesense": "docker-compose -f docker-compose.local.yml up -d && next dev"
   },
   "author": "Shu Ding",
   "license": "Apache-2.0",
