@@ -5,8 +5,8 @@ const typesenseClient = new Typesense.Client({
   nodes: [
     {
       host: process.env.TYPESENSE_HOST || '',
-      port: parseInt(process.env.TYPESENSE_PORT || '443'),
-      protocol: process.env.TYPESENSE_PROTOCOL || 'https',
+      port: parseInt(process.env.TYPESENSE_PORT || '8108'),
+      protocol: process.env.TYPESENSE_PROTOCOL || 'http',
     },
   ],
   apiKey: process.env.TYPESENSE_API_KEY || '',
@@ -17,15 +17,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method === 'GET') {
     let { q } = req.query;
 
-    // Ensure q is a string (if it's an array, get the first element)
     if (Array.isArray(q)) {
-      q = q[0]; // Take the first element if it's an array
+      q = q[0];
     }
 
     try {
       console.log('Searching with query:', q);
       const searchResults = await typesenseClient.collections('docs').documents().search({
-        q: q || '*', // If q is undefined or empty, use '*'
+        q: q || '*',
         query_by: 'title,content',
         per_page: 5,
       });
