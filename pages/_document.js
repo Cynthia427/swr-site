@@ -1,15 +1,15 @@
-import React from 'react'
-import Document, { Html, Head, Main, NextScript } from 'next/document'
-import { SkipNavLink } from "nextra-theme-docs";
+// pages/_document.js
+import Document, { Head, Html, Main, NextScript } from 'next/document';
 
 class MyDocument extends Document {
   render() {
     return (
-      <Html lang="en">
+      <Html>
         <Head />
         <body>
-          <SkipNavLink styled />
           <Main />
+          {/* Modal root where the modal will be mounted */}
+          <div id="modal-root"></div>
           <NextScript />
         </body>
       </Html>
@@ -17,4 +17,4 @@ class MyDocument extends Document {
   }
 }
 
-export default MyDocument
+export default MyDocument;

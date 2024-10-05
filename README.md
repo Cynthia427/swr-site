@@ -21,7 +21,7 @@ This is the official documentation site for SWR (stale-while-revalidate), a Reac
 ### Local Development
 
 1. Clone the repository:
-git clone https://github.com/your-username/swr-site.git
+git clone https://github.com/cynthia427/swr-site.git
 cd swr-site
 Copy
 2. Install dependencies:

@@ -3,6 +3,7 @@ import { useConfig } from "nextra-theme-docs";
 import Logo from "./components/logo";
 import Vercel from "./components/vercel";
 import useLocalesMap from "./components/use-locales-map";
+import dynamic from 'next/dynamic';
 import {
   editTextMap,
   feedbackLinkMap,
@@ -10,10 +11,12 @@ import {
   gitTimestampMap,
   headDescriptionMap,
   languageMap,
-  searchPlaceholderMap,
   tableOfContentsTitleMap,
   titleMap,
 } from "./translations/text";
+
+// Dynamically import the custom Search component
+const Search = dynamic(() => import('./components/Search'), { ssr: false });
 
 /** @type {import('nextra-theme-docs').DocsThemeConfig} */
 const themeConfig = {
@@ -30,8 +33,9 @@ const themeConfig = {
     float: true,
     title: () => useLocalesMap(tableOfContentsTitleMap),
   },
+  // Use custom Search component
   search: {
-    placeholder: () => useLocalesMap(searchPlaceholderMap),
+    component: <Search />,
   },
   editLink: {
     text: () => useLocalesMap(editTextMap),

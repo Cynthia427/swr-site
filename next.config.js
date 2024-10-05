@@ -63,4 +63,12 @@ module.exports = withNextra({
     ];
   },
   reactStrictMode: true,
+  env: {
+    NEXT_PUBLIC_TYPESENSE_HOST: process.env.TYPESENSE_HOST,
+    NEXT_PUBLIC_TYPESENSE_PORT: process.env.TYPESENSE_PORT,
+    NEXT_PUBLIC_TYPESENSE_PROTOCOL: process.env.TYPESENSE_PROTOCOL,
+    NEXT_PUBLIC_TYPESENSE_SEARCH_KEY: process.env.TYPESENSE_API_KEY,
+    NEXT_PUBLIC_AGENCY_SWARM_URL: process.env.AGENCY_SWARM_URL,
+    NEXT_PUBLIC_CREATE_CHAT_URL: process.env.CREATE_CHAT_URL,
+  },
 });
